@@ -36,12 +36,16 @@ extension ResultViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 1 {
             // Celda de total
             let cell = tableView.dequeueReusableCell(withIdentifier: "totalCell", for: indexPath) as UITableViewCell
+            let amount = cashOut.map({ ($0.nomination.rawValue * Double($0.quantity) )}).reduce(0, +)
+            cell.textLabel?.text = "$ \(DecimalMasker().mask(String(amount)))"
             return cell
         }
         
         //Celda de valores
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as UITableViewCell
-        
+        cell.textLabel?.text = cashOut[indexPath.row].nomination.toString()
+        let quantity = cashOut[indexPath.row].quantity
+        cell.detailTextLabel?.text = String(quantity)
         return cell
     }
     
