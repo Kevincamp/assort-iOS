@@ -12,20 +12,20 @@ final class Core {
     fileprivate var rules: [Rule]?
     
     init(WithCloseAmount closeAmount: Double,
-         params: [NominalAgregatedValue],
+         params: [Item],
          rules: [Rule]? = nil) {
         self.closeAmount = closeAmount
         self.rules = rules
         parameters = Dictionary<Nomination, Int>()
         
         for item in params {
-            if parameters.index(forKey: item.getNomination()) == nil {
-                parameters[item.getNomination()] = item.getQuantity()
+            if parameters.index(forKey: item.nomination) == nil {
+                parameters[item.nomination] = item.quantity
             }
             
-            if let oldValue = parameters[item.getNomination()],
-               let itemQuantity = item.getQuantity() {
-                parameters[item.getNomination()] = oldValue + itemQuantity
+            if let oldValue = parameters[item.nomination] {
+                let itemQuantity = item.quantity
+                   parameters[item.nomination] = oldValue + itemQuantity
             }
             
         }
@@ -54,16 +54,16 @@ final class Core {
     }
     
     
-    public func box() -> [NominalAgregatedValue] {
+    public func box() -> [Item] {
         var amount = closeAmount
-        var box = [NominalAgregatedValue]()
+        var box = [Item]()
         
         // Si acierta en algunas de las reglas entonces se agrega directamente al valor con que el que debe quedar la caja
-        if let assertRules = assertRules() {
-            box.append(contentsOf: assertRules.map({ $0.toNominalAggregatedValue() }))
-            let diffAmount = assertRules.map({ ($0.getNomination().rawValue * Double($0.getQuantity()) )}).reduce(0, +)
-            amount = amount! - diffAmount
-        }
+//        if let assertRules = assertRules() {
+//            box.append(contentsOf: assertRules.map({ $0.toNominalAggregatedValue() }))
+//            let diffAmount = assertRules.map({ ($0.getNomination().rawValue * Double($0.getQuantity()) )}).reduce(0, +)
+//            amount = amount! - diffAmount
+//        }
         
         //Ahora si se calcula los demas valores
         for nominal in NOMINAL_LIST {

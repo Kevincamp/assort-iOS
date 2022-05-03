@@ -9,6 +9,7 @@ import UIKit
 protocol LandingViewProtocol: BaseViewProtocol {
     func renderDisplay(_ text: String)
     func eraseButton(isHidden: Bool)
+    func presentError(error:Error)
 }
 
 class LandingViewController: BaseViewController {
@@ -130,5 +131,14 @@ extension LandingViewController: LandingViewProtocol {
     
     func eraseButton(isHidden: Bool) {
         eraseButton.isHidden = isHidden
+    }
+    
+    func presentError(error: Error) {
+        let alertController = UIAlertController(title: "Aviso",
+                                                message: error.localizedDescription,
+                                                preferredStyle: .alert)
+               let defaultAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+               alertController.addAction(defaultAction)
+               self.present(alertController, animated: true, completion: nil)
     }
 }

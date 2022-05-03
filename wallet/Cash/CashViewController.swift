@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CashViewProtocol: BaseViewProtocol {
-    
+    func updateAmount(_ newAmount: String)
 }
 
 class CashViewController: BaseViewController {
@@ -19,15 +19,12 @@ class CashViewController: BaseViewController {
     
     var viewModel: CashViewModelProtocol?
     
-    private var amount: Double!
-    private var nominationList: [NominalAgregatedValue]!
-    
-    private var nominalAgregatedValueSelected: NominalAgregatedValue!
-    private var nominalAgregatedValueIndexPath: IndexPath!
+    private var tempItem: Item!
+    private var tempItemNominalIndexPath: IndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nominationList = [NominalAgregatedValue]()
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -37,8 +34,8 @@ class CashViewController: BaseViewController {
         
         if identifier == "SetNominalValueSegue" {
             let nominalSelectedVC = segue.destination as? NominalSelectionViewController
-            nominalSelectedVC?.nominalSelected = nominalAgregatedValueSelected
-            nominalSelectedVC?.indexPath = nominalAgregatedValueIndexPath
+            nominalSelectedVC?.tempItem = tempItem
+            nominalSelectedVC?.indexPath = tempItemNominalIndexPath
         }
         
         if identifier == "ResultVCSegue" {
@@ -49,11 +46,11 @@ class CashViewController: BaseViewController {
     
     @IBAction func unwindSegueToBudgetVC(_ segue: UIStoryboardSegue){
         if let nominationSelectedVC = segue.source as? NominalSelectionViewController {
-            let updatedItem = nominationSelectedVC.nominalSelected
-            guard let updatedItemIndexPathRow = nominationSelectedVC.indexPath?.row else {
+            guard let newItem = nominationSelectedVC.tempItem,
+                  let indexPath = nominationSelectedVC.indexPath else {
                 return
             }
-            nominationList[updatedItemIndexPathRow] = updatedItem!
+            self.viewModel?.updateNominationValue(at: indexPath, with: newItem)
             tableView.reloadData()
         }
     }
@@ -64,36 +61,52 @@ class CashViewController: BaseViewController {
 }
 
 
+// MARK: TableViewDelegate and Datasource
 extension CashViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if nominationList.count == 0 {
+        guard let list = viewModel?.cashOutList,
+           list.count > 0 else {
             return 1
         }
-        return nominationList.count + 1
+        
+        return list.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (nominationList.count == 0)  || (indexPath.row == nominationList.count) {
+        guard let cashOutlist = viewModel?.cashOutList,
+              cashOutlist.count > 0 else {
             let addNominationCell = tableView.dequeueReusableCell(withIdentifier: "AddNominationCellIdentifier", for: indexPath) as UITableViewCell
             return addNominationCell
         }
+        
+        if indexPath.row == cashOutlist.count {
+            let addNominationCell = tableView.dequeueReusableCell(withIdentifier: "AddNominationCellIdentifier", for: indexPath) as UITableViewCell
+            return addNominationCell
+        }
+        
             
-        let nominationIterator = nominationList[indexPath.row]
+        let cashOutIterator = cashOutlist[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "NominationCellIdentifier", for: indexPath) as! NominationCell
-        cell.viewModel = NominationCellViewModel(nominationValue: nominationIterator, indexPath: indexPath)
+        cell.viewModel = NominationCellViewModel(nominationValue: cashOutIterator,
+                                                 indexPath: indexPath)
         cell.controller = self
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if nominationList.count == 0 || indexPath.row == nominationList.count {
-            nominationList.append(NominalAgregatedValue())
-            tableView.insertRows(at: [indexPath], with: .automatic)
+        guard let cashOutlist = viewModel?.cashOutList,
+              cashOutlist.count > 0 ||
+                indexPath.row == cashOutlist.count else {
+            return
         }
+        
+        let defaultItem = Item(nomination: .fiftyCents, quantity: 1)
+        viewModel?.addParameter(item: defaultItem)
+        tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -103,44 +116,25 @@ extension CashViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension CashViewController {
-    public func deleteValue(_ tableView: UITableView,
-                            indexPath: IndexPath) {
-        nominationList.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        recalculateAmount()
+    public func didTapDeleteParameter(_ itemIndexPath: IndexPath) {
+        viewModel?.deleteParameter(itemIndexPath)
+        tableView.deleteRows(at: [itemIndexPath], with: .automatic)
     }
     
-    public func setNominalValue(_ tableView: UITableView,
-                                indexPath: IndexPath) {
-        nominalAgregatedValueSelected = nominationList[indexPath.row]
-        nominalAgregatedValueIndexPath = indexPath
+    public func didTapNominationButton(_ itemIndexPath: IndexPath) {
+        tempItem = viewModel?.getCashOutItem(at: itemIndexPath)
+        tempItemNominalIndexPath = itemIndexPath
         performSegue(withIdentifier: "SetNominalValueSegue", sender: self)
-        recalculateAmount()
     }
     
-    public func updateAmount(_ tableView: UITableView,
-                             indexPath: IndexPath,
+    public func updateQuantity(at indexPath: IndexPath,
                              quantity: Int) {
-        
-        nominationList[indexPath.row].updateQuantity(quantity)
-        recalculateAmount()
-    }
-    
-    public func recalculateAmount() {
-        var amount = 0.0
-        for item in nominationList {
-            guard let quantity = item.getQuantity() else {
-                      amount += 0
-                return
-            }
-            let nominalRawValue = item.getNomination().rawValue
-            amount += (nominalRawValue * Double(quantity))
-        }
-        
-        budgetLabel.text = "$ \(DecimalMasker().mask(String(amount)))"
+        viewModel?.updateQuantityItem(at: indexPath, newQuantity: quantity)
     }
 }
 
 extension CashViewController: CashViewProtocol {
-    
+    func updateAmount(_ newAmount: String) {
+        budgetLabel.text = "$ \(DecimalMasker().mask(String(newAmount)))"
+    }
 }

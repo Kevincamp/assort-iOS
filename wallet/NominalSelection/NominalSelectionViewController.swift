@@ -13,7 +13,7 @@ let NOMINAL_LIST = [ Nomination.coin, Nomination.fiveCents, Nomination.tenCents,
                      Nomination.five, Nomination.ten, Nomination.twenty]
 
 class NominalSelectionViewController: UIViewController {
-    var nominalSelected: NominalAgregatedValue!
+    var tempItem: Item!
     var indexPath: IndexPath!
     
     @IBOutlet weak var tableView: UITableView!
@@ -40,7 +40,7 @@ extension NominalSelectionViewController: UITableViewDelegate, UITableViewDataSo
         let nominalCell = tableView.dequeueReusableCell(withIdentifier: "nominalDescriptionCellIdentifier", for: indexPath) as UITableViewCell
         var content = nominalCell.defaultContentConfiguration()
         content.text = nominalIterator.toString()
-        if nominalSelected.getNomination() == nominalIterator {
+        if tempItem.nomination == nominalIterator {
             nominalCell.accessoryType = .checkmark
         }
         nominalCell.textLabel?.text = nominalIterator.toString()
@@ -49,7 +49,7 @@ extension NominalSelectionViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        nominalSelected.updateNomination(NOMINAL_LIST[indexPath.row])
+        tempItem.nomination = NOMINAL_LIST[indexPath.row]
         performSegue(withIdentifier: "unwindSegueToBudgetVC", sender: self)
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct CashOutItem: Codable {
-    let nomination: String
-    let quantity: Int
+struct Item: Codable {
+    var nomination: Nomination
+    var quantity: Int
 }

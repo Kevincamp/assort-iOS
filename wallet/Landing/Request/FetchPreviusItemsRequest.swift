@@ -8,15 +8,15 @@
 import Foundation
 struct FetchPreviusItemsRequest: Request {
     var url: String { "till" }
-    typealias ResponseType = [CashOutItem]
+    typealias ResponseType = [Item]
     
     
-    func responseModel(data: Data) -> Result<[CashOutItem], CustomError> {
-        let result = data.decoded(BaseResponse<[CashOutItem]>.self,
+    func responseModel(data: Data) -> Result<[Item], CustomError> {
+        let result = data.decoded(BaseResponse<[Item]>.self,
                                   decodingStrategy: .convertFromSnakeCase)
         switch result {
-        case .success(let previousValues):
-            return .success(previousValues.responseData)
+        case .success(let rules):
+            return .success(rules.responseData)
         case .failure(let error):
             return .failure(error)
         }

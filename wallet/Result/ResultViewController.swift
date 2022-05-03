@@ -11,7 +11,7 @@ import UIKit
 class ResultViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var cashOut: [NominalAgregatedValue]!
+    var cashOut: [Item]!
     
     override func viewDidLoad() {
         self.navigationItem.setHidesBackButton(true, animated: true)

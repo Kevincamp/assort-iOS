@@ -9,17 +9,15 @@ import Foundation
 import UIKit
 
 struct NominationCellViewModel {
-    var nominationValue: NominalAgregatedValue
+    var nominationValue: Item
     var indexPath: IndexPath
     
     public func nominationText() -> String {
-        return nominationValue.getNomination().toString()
+        return nominationValue.nomination.toString()
     }
     
     public func getQuantity() -> String? {
-        guard let quantity = nominationValue.getQuantity() else {
-            return nil
-        }
+        let quantity = nominationValue.quantity
         return "\(quantity)"
     }
     
@@ -34,24 +32,24 @@ final class NominationCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var quantityField: UITextField!
     
     func initEventListeners() {
-        let didTapDeleteButton = UITapGestureRecognizer(target: self, action: #selector(deleteRow))
+        let didTapDeleteButton = UITapGestureRecognizer(target: self, action: #selector(didTapDeleteParameter))
         deleteButton.addGestureRecognizer(didTapDeleteButton)
         
-        let didTapNominationButton = UITapGestureRecognizer(target: self, action: #selector(setNominalValue))
+        let didTapNominationButton = UITapGestureRecognizer(target: self, action: #selector(didTapNominationButton))
         nominationButton.addGestureRecognizer(didTapNominationButton)
     }
     
-    @objc internal func deleteRow(){
-        if let controller = controller as? CashViewController, let viewModel = viewModel {
-            controller.deleteValue(controller.tableView,
-                                   indexPath: viewModel.indexPath)
+    @objc internal func didTapDeleteParameter(){
+        if let controller = controller as? CashViewController,
+            let viewModel = viewModel {
+            controller.didTapDeleteParameter(viewModel.indexPath)
         }
     }
     
-    @objc internal func setNominalValue() {
-        if let controller = controller as? CashViewController, let viewModel = viewModel {
-            controller.setNominalValue(controller.tableView,
-                                       indexPath: viewModel.indexPath)
+    @objc internal func didTapNominationButton() {
+        if let controller = controller as? CashViewController,
+            let viewModel = viewModel {
+            controller.didTapNominationButton(viewModel.indexPath)
         }
     }
     
@@ -73,9 +71,8 @@ final class NominationCell: UITableViewCell, UITextFieldDelegate {
                     let viewModel = viewModel,
                    let quantityStr = textField.text,
                    let quantity = Int(quantityStr) {
-                    controller.updateAmount(controller.tableView,
-                                               indexPath: viewModel.indexPath,
-                                            quantity: quantity)
+                    controller.updateQuantity(at: viewModel.indexPath,
+                                              quantity: quantity)
                 }
     }
     

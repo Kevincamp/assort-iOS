@@ -7,13 +7,12 @@
 
 import Foundation
 protocol LandingViewModelProtocol {
-    var cashOutItemList:[CashOutItem] { get }
+    var rules:[Item] { get }
     var pad: [Int] { get }
     var valueToDisplay: String { get }
     var valueArray: [Int] { get }
     
     var idealAmountToClose: Double { get }
-    var rules: [Rule] { get }
     
     func viewDidLoad()
     func didSelectItemAt(_ indexPath: IndexPath)
@@ -25,7 +24,7 @@ class LandingViewModel: LandingViewModelProtocol {
     
     private var fetchPreviousItemsRequest: FetchPreviusItemsRequest
 
-    var cashOutItemList: [CashOutItem] = []
+    var rules: [Item] = []
     var pad: [Int] = [1...9].flatMap({ $0 })
     var valueToDisplay: String = "0"
     var valueArray: [Int] = [] {
@@ -35,8 +34,6 @@ class LandingViewModel: LandingViewModelProtocol {
     }
     
     var idealAmountToClose: Double = 0
-    var rules: [Rule] = []
-    
     
     init(fetchPreviousItemsRequest: FetchPreviusItemsRequest = FetchPreviusItemsRequest()){
         self.fetchPreviousItemsRequest = fetchPreviousItemsRequest
@@ -48,16 +45,11 @@ class LandingViewModel: LandingViewModelProtocol {
         fetchPreviousItemsRequest.start { [weak self] result in
             self?.view?.shouldShowLoader(false)
             switch result {
-            case .success(let items):
-                self?.cashOutItemList = items
-                guard let rules = self?.cashOutItemList.map({ Rule(cashOutItem: $0) }) else {
-                    return
-                }
-                
+            case .success(let rules):
                 self?.rules = rules
                 break
-            case .failure(_):
-                fatalError()
+            case .failure(let error):
+                self?.view?.presentError(error: error)
                 break
             }
         }
@@ -120,8 +112,5 @@ class LandingViewModel: LandingViewModelProtocol {
         idealAmountToClose = valueToDisplay.convertToDouble()
         view?.renderDisplay("$ \(DecimalMasker().mask(valueToDisplay))")
     }
-    
-    
-    
     
 }
