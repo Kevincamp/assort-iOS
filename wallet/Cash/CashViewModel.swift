@@ -13,11 +13,15 @@ protocol CashViewModelProtocol {
     var amount: Double { get }
     var cashOutList: [Item] { get }
     
+    var box: [Item] { get }
+    
     func getCashOutItem(at indePath: IndexPath) -> Item
     func addParameter(item:Item)
     func deleteParameter(_ itemIndexPath: IndexPath)
     func updateNominationValue(at itemIndexPath: IndexPath, with newItem: Item)
     func updateQuantityItem(at itemIndexPath: IndexPath, newQuantity: Int)
+    
+    func cashOut()
 }
 
 
@@ -39,6 +43,8 @@ class CashViewModel: CashViewModelProtocol {
     }
     
     var cashOutList: [Item] = []
+    
+    var box: [Item] = []
     
     init(idealAmountToClose: Double,
          rules: [Item]) {
@@ -78,5 +84,12 @@ class CashViewModel: CashViewModelProtocol {
             amount += (nominalRawValue * Double(quantity))
         }
         self.amount = amount
+    }
+    
+    func cashOut() {
+        self.box = Core(idealAmountToClose: idealAmountToClose,
+             cashOutList: cashOutList,
+             rules: rules).box()
+        
     }
 }

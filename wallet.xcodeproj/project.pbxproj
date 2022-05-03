@@ -45,10 +45,8 @@
 		466FB4FB279CFBA1009C7452 /* NominalSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB4FA279CFBA1009C7452 /* NominalSelectionViewController.swift */; };
 		466FB4FC279CFBA1009C7452 /* NominalSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB4FA279CFBA1009C7452 /* NominalSelectionViewController.swift */; };
 		466FB4FE279CFCAB009C7452 /* Nomination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB4FD279CFCAB009C7452 /* Nomination.swift */; };
-		466FB501279E1431009C7452 /* NominalAgregatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB500279E1431009C7452 /* NominalAgregatedValue.swift */; };
 		46B5434527A5844C003AC47E /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B5434427A5844C003AC47E /* Core.swift */; };
 		46B5434627A5844C003AC47E /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B5434427A5844C003AC47E /* Core.swift */; };
-		46B5434827A584E8003AC47E /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B5434727A584E8003AC47E /* Rule.swift */; };
 		46F1C291279B2DD700AD02AC /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C290279B2DD700AD02AC /* CashViewController.swift */; };
 		46F1C292279B2DD700AD02AC /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C290279B2DD700AD02AC /* CashViewController.swift */; };
 		46F1C294279B71E300AD02AC /* NominationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C293279B71E300AD02AC /* NominationCell.swift */; };
@@ -115,9 +113,7 @@
 		46606B52279218CA0025E5FD /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		466FB4FA279CFBA1009C7452 /* NominalSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NominalSelectionViewController.swift; sourceTree = "<group>"; };
 		466FB4FD279CFCAB009C7452 /* Nomination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nomination.swift; sourceTree = "<group>"; };
-		466FB500279E1431009C7452 /* NominalAgregatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NominalAgregatedValue.swift; sourceTree = "<group>"; };
 		46B5434427A5844C003AC47E /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
-		46B5434727A584E8003AC47E /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		46F1C290279B2DD700AD02AC /* CashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashViewController.swift; sourceTree = "<group>"; };
 		46F1C293279B71E300AD02AC /* NominationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NominationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,14 +163,6 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
-		4606874C2820E52C00C7E87A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4606874D2820E54C00C7E87A /* Item.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		460687512820F43600C7E87A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,9 +190,8 @@
 		460687602821187100C7E87A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4606874D2820E54C00C7E87A /* Item.swift */,
 				466FB4FD279CFCAB009C7452 /* Nomination.swift */,
-				466FB500279E1431009C7452 /* NominalAgregatedValue.swift */,
-				46B5434727A584E8003AC47E /* Rule.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,7 +271,6 @@
 			isa = PBXGroup;
 			children = (
 				460687492820E48000C7E87A /* Request */,
-				4606874C2820E52C00C7E87A /* Model */,
 				4606873E2820DC7600C7E87A /* LandingViewModel.swift */,
 				46606B0A279206FE0025E5FD /* LandingViewController.swift */,
 				46606B412792145F0025E5FD /* NumberCell.swift */,
@@ -513,10 +499,8 @@
 				46606B502792187B0025E5FD /* NumberPadLabel.swift in Sources */,
 				46606B53279218CA0025E5FD /* UIColor+Extension.swift in Sources */,
 				46B5434527A5844C003AC47E /* Core.swift in Sources */,
-				46B5434827A584E8003AC47E /* Rule.swift in Sources */,
 				4606873F2820DC7600C7E87A /* LandingViewModel.swift in Sources */,
 				4606875F2821185200C7E87A /* CashViewModel.swift in Sources */,
-				466FB501279E1431009C7452 /* NominalAgregatedValue.swift in Sources */,
 				4606875D2821130C00C7E87A /* String+Convert.swift in Sources */,
 				4606874E2820E54C00C7E87A /* Item.swift in Sources */,
 			);

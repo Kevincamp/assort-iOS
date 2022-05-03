@@ -40,6 +40,7 @@ class CashViewController: BaseViewController {
         
         if identifier == "ResultVCSegue" {
             let resultVC = segue.destination as? ResultViewController
+            resultVC?.cashOut = viewModel?.box
             
         }
     }
@@ -56,7 +57,7 @@ class CashViewController: BaseViewController {
     }
     
     @IBAction func didTapDoneButton(_ sender: AnyObject) {
-        
+        viewModel?.cashOut()
     }
 }
 
