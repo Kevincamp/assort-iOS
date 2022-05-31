@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>URL</key>
+	<string>https://627095bee1c7aec428f571fd.mockapi.io/dulce-arte/api/v1/</string>
+	<key>DecimalFourLength</key>
+	<integer>4</integer>
+	<key>DecimalMaxLength</key>
+	<integer>2</integer>
+	<key>IntegerMaxLength</key>
+	<integer>10</integer>
+	<key>MaxLength</key>
+	<integer>15</integer>
+	<key>IntegerMask</key>
+	<string>.</string>
+	<key>DecimalMask</key>
+	<string>,</string>
+</dict>
+</plist>
