@@ -87,9 +87,9 @@ class CashViewModel: CashViewModelProtocol {
     }
     
     func cashOut() {
-        self.box = Core(idealAmountToClose: idealAmountToClose,
-             cashOutList: cashOutList,
-             rules: rules).box()
+//        self.box = Core(idealAmountToClose: idealAmountToClose,
+//             cashOutList: cashOutList,
+//             rules: rules).box()
         
     }
 }

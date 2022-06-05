@@ -6,7 +6,13 @@
 //
 
 import Foundation
-struct Item: Codable {
+public struct Item: Codable {
     var nomination: Nomination
     var quantity: Int
+}
+
+extension Item: Equatable {
+    public static func == (lhs: Item, rhs: Item) -> Bool {
+        return lhs.nomination == rhs.nomination && lhs.quantity == rhs.quantity
+    }
 }

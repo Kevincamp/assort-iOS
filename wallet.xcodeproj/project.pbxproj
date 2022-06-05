@@ -27,7 +27,7 @@
 		46606B0E279206FE0025E5FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46606B0C279206FE0025E5FD /* Main.storyboard */; };
 		46606B10279206FF0025E5FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46606B0F279206FF0025E5FD /* Assets.xcassets */; };
 		46606B13279206FF0025E5FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46606B11279206FF0025E5FD /* LaunchScreen.storyboard */; };
-		46606B1E279206FF0025E5FD /* walletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B1D279206FF0025E5FD /* walletTests.swift */; };
+		46606B1E279206FF0025E5FD /* CoreCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B1D279206FF0025E5FD /* CoreCaseTest.swift */; };
 		46606B28279206FF0025E5FD /* walletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B27279206FF0025E5FD /* walletUITests.swift */; };
 		46606B2A279206FF0025E5FD /* walletUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B29279206FF0025E5FD /* walletUITestsLaunchTests.swift */; };
 		46606B3B279209A90025E5FD /* LobsterTwo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46606B37279209A80025E5FD /* LobsterTwo-Bold.ttf */; };
@@ -45,12 +45,16 @@
 		466FB4FB279CFBA1009C7452 /* NominalSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB4FA279CFBA1009C7452 /* NominalSelectionViewController.swift */; };
 		466FB4FC279CFBA1009C7452 /* NominalSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB4FA279CFBA1009C7452 /* NominalSelectionViewController.swift */; };
 		466FB4FE279CFCAB009C7452 /* Nomination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB4FD279CFCAB009C7452 /* Nomination.swift */; };
+		46A494AF284A603100E06746 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4606874D2820E54C00C7E87A /* Item.swift */; };
+		46A494B0284A603700E06746 /* Nomination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FB4FD279CFCAB009C7452 /* Nomination.swift */; };
+		46A494B1284A604300E06746 /* DecimalMasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B462792158E0025E5FD /* DecimalMasker.swift */; };
+		46A494B2284A604F00E06746 /* Masker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B432792155B0025E5FD /* Masker.swift */; };
+		46A494B3284A607C00E06746 /* ProjectConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B4D279216AE0025E5FD /* ProjectConfigurationManager.swift */; };
+		46A494B4284A608800E06746 /* NumberMasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46606B48279215B50025E5FD /* NumberMasker.swift */; };
 		46B5434527A5844C003AC47E /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B5434427A5844C003AC47E /* Core.swift */; };
 		46B5434627A5844C003AC47E /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B5434427A5844C003AC47E /* Core.swift */; };
 		46F1C291279B2DD700AD02AC /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C290279B2DD700AD02AC /* CashViewController.swift */; };
-		46F1C292279B2DD700AD02AC /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C290279B2DD700AD02AC /* CashViewController.swift */; };
 		46F1C294279B71E300AD02AC /* NominationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C293279B71E300AD02AC /* NominationCell.swift */; };
-		46F1C295279B71E300AD02AC /* NominationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C293279B71E300AD02AC /* NominationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +99,7 @@
 		46606B12279206FF0025E5FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46606B14279206FF0025E5FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46606B19279206FF0025E5FD /* walletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		46606B1D279206FF0025E5FD /* walletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletTests.swift; sourceTree = "<group>"; };
+		46606B1D279206FF0025E5FD /* CoreCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreCaseTest.swift; sourceTree = "<group>"; };
 		46606B23279206FF0025E5FD /* walletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46606B27279206FF0025E5FD /* walletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletUITests.swift; sourceTree = "<group>"; };
 		46606B29279206FF0025E5FD /* walletUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -242,7 +246,7 @@
 		46606B1C279206FF0025E5FD /* walletTests */ = {
 			isa = PBXGroup;
 			children = (
-				46606B1D279206FF0025E5FD /* walletTests.swift */,
+				46606B1D279206FF0025E5FD /* CoreCaseTest.swift */,
 			);
 			path = walletTests;
 			sourceTree = "<group>";
@@ -510,11 +514,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46A494B1284A604300E06746 /* DecimalMasker.swift in Sources */,
 				46B5434627A5844C003AC47E /* Core.swift in Sources */,
-				46606B1E279206FF0025E5FD /* walletTests.swift in Sources */,
-				46F1C295279B71E300AD02AC /* NominationCell.swift in Sources */,
+				46A494B0284A603700E06746 /* Nomination.swift in Sources */,
+				46606B1E279206FF0025E5FD /* CoreCaseTest.swift in Sources */,
+				46A494B4284A608800E06746 /* NumberMasker.swift in Sources */,
 				466FB4FC279CFBA1009C7452 /* NominalSelectionViewController.swift in Sources */,
-				46F1C292279B2DD700AD02AC /* CashViewController.swift in Sources */,
+				46A494B2284A604F00E06746 /* Masker.swift in Sources */,
+				46A494AF284A603100E06746 /* Item.swift in Sources */,
+				46A494B3284A607C00E06746 /* ProjectConfigurationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class DecimalMasker: Masker {
+public class DecimalMasker: Masker {
     
     var decimalSeparator: String = ProjectConfigurationManager.shared.decimalMask
     var integerSeparator: String = ProjectConfigurationManager.shared.integerMask

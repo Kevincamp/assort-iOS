@@ -64,11 +64,11 @@ class CashViewController: BaseViewController {
 
 // MARK: TableViewDelegate and Datasource
 extension CashViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let list = viewModel?.cashOutList,
            list.count > 0 else {
             return 1
@@ -77,7 +77,7 @@ extension CashViewController: UITableViewDelegate, UITableViewDataSource {
         return list.count + 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cashOutlist = viewModel?.cashOutList,
               cashOutlist.count > 0 else {
             let addNominationCell = tableView.dequeueReusableCell(withIdentifier: "AddNominationCellIdentifier", for: indexPath) as UITableViewCell
@@ -98,7 +98,7 @@ extension CashViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cashOutlist = viewModel?.cashOutList,
               cashOutlist.count > 0 ||
                 indexPath.row == cashOutlist.count else {
@@ -110,7 +110,7 @@ extension CashViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
     

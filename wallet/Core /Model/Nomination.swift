@@ -22,3 +22,9 @@ public enum Nomination: Double, Codable {
         return "$ \(DecimalMasker().mask(nominationStr))"
     }
 }
+
+extension Nomination: Equatable {
+    public static func == (lhs: Nomination, rhs: Nomination) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+}

@@ -6,69 +6,99 @@
 //
 
 import Foundation
-final class Core {
-    fileprivate var idealAmountToClose: Double!
-    fileprivate var cashOutItems: Dictionary<Nomination, Int>!
-    fileprivate var rules: [Item]?
+class Core {
+//    fileprivate var idealAmountToClose: Double!
+//    fileprivate var cashOutItems: Dictionary<Nomination, Int>!
+//    fileprivate var rules: [Item]?
     
-    init(idealAmountToClose closeAmount: Double,
-         cashOutList: [Item],
-         rules: [Item]? = nil) {
-        self.idealAmountToClose = closeAmount
-        self.rules = rules
-        cashOutItems = Dictionary<Nomination, Int>()
-        
-        for item in cashOutList {
-            if cashOutItems.index(forKey: item.nomination) == nil {
-                cashOutItems[item.nomination] = item.quantity
-            }
-            
-            if let oldValue = cashOutItems[item.nomination] {
-                let itemQuantity = item.quantity
-                   cashOutItems[item.nomination] = oldValue + itemQuantity
-            }
-        }
-    }
+//    init(idealAmountToClose closeAmount: Double,
+//         cashOutList: [Item],
+//         rules: [Item]? = nil) {
+//        self.idealAmountToClose = closeAmount
+//        self.rules = rules
+//        cashOutItems = Dictionary<Nomination, Int>()
+//    }
     
     public func box() -> [Item] {
-        var box = [Item]()
-        
-        // Si acierta en algunas de las reglas entonces se agrega directamente al valor con que el que debe quedar la caja
-        if let assertRules = assertRules(),
-            var tempAmount = idealAmountToClose {
-            box.append(contentsOf: assertRules)
-            let diffAmount = assertRules.map({ ($0.nomination.rawValue * Double($0.quantity) )}).reduce(0, +)
-            tempAmount = tempAmount - diffAmount
-        }
-        
-        //Ahora si se calcula los demas valores
-        for nominal in NOMINAL_LIST {
-            if let quantity = cashOutItems[nominal] {
-                
+        return []
+    }
+    
+    /*
+     Funcion unifiedRepeteadValues
+     Retorna: Retorna la suma de los valores de una moneda en especifico
+     **/
+    public func unifiedRepeteadValues(cashOutItems: [Item]) -> Dictionary<Nomination, Int> {
+        var res =  Dictionary<Nomination, Int>()
+        for item in cashOutItems {
+            if let oldValue = res[item.nomination] {
+                let itemQuantity = item.quantity
+                res[item.nomination] = oldValue + itemQuantity
+            } else {
+                res[item.nomination] = item.quantity
             }
         }
-        return box
+        return res
     }
     
     /*
      Funcion assertRules
      Retorna: Reglas cumplidas en base a la cantidad de dinero de caja ingresado
      **/
-    fileprivate func assertRules() -> [Item]? {
+    public func matchRulesWithCashOut(cashOutItems: Dictionary<Nomination, Int>,
+                                      rules: [Item]?) -> [Item]? {
         var res:[Item] = []
         
-        guard let rules = rules else {
-            return nil
-        }
-        
-        for rule in rules {
-            if let paramQuantity = cashOutItems[rule.nomination] {
-                if rule.quantity == paramQuantity {
-                    res.append(rule)
+        if let rules = rules {
+            for rule in rules {
+                if let paramQuantity = cashOutItems[rule.nomination] {
+                    if paramQuantity >= rule.quantity {
+                        res.append(rule)
+                    }
                 }
             }
         }
         
         return res.count == 0 ? nil : res
+    }
+    
+    public func tryToComplete(amount: Double, with cashOutItems:Dictionary<Nomination, Int>) -> Dictionary<Nomination, Int> {
+        
+        var res: Dictionary<Nomination, Int> =
+        Dictionary<Nomination, Int>()
+        
+        var currentAmount = amount
+        
+        let orderNomination:[Nomination] = [.one,
+                                            .fiftyCents,
+                                            .quarter,
+                                            .tenCents,
+                                            .fiveCents,
+                                            .five,
+                                            .ten,
+                                            .twenty]
+        
+        for nomination in orderNomination {
+            if currentAmount == 0 {
+                break
+            }
+            
+            // multiplo de nominacion que necesito para llegar al amount
+            let remainder = (currentAmount / nomination.rawValue).rounded(.towardZero)
+            
+            // Si mi cantidad es menor o igual a la cantidad de
+            if let quantity = cashOutItems[nomination] {
+                
+                if quantity >= Int(remainder) {
+                    let amount = nomination.rawValue * Double(remainder)
+                    res[nomination] = Int(remainder)
+                    currentAmount -= amount
+                } else {
+                    let amount = nomination.rawValue * Double(quantity)
+                    res[nomination] = quantity
+                    currentAmount -= amount
+                }
+            }
+        }
+        return res
     }
 }
