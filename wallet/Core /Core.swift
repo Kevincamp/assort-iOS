@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 final class Core {
     fileprivate var idealAmountToClose: Double!
     fileprivate var cashOutItems: Dictionary<Nomination, Int>!

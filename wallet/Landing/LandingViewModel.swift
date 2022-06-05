@@ -42,7 +42,7 @@ class LandingViewModel: LandingViewModelProtocol {
     
     func viewDidLoad() {
         view?.shouldShowLoader(true)
-        fetchPreviousItemsRequest.start { [weak self] result in
+        fetchPreviousItemsRequest.test_start(json: TempData.previusItemsJson()) { [weak self] result in
             self?.view?.shouldShowLoader(false)
             switch result {
             case .success(let rules):

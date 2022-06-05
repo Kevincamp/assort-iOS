@@ -44,6 +44,13 @@ extension Request {
     func start(completion: @escaping (Result<ResponseType, CustomError>) -> Void) {
         start(isRetry: false, completion: completion)
     }
+    
+    func test_start(json: String, delay: Double = 0.0, completion: @escaping (Result<ResponseType, CustomError>) -> Void) {
+        Utils.performAfterDelay(delay: delay) {
+            let jsonData = Data(json.utf8)
+            completion(responseModel(data: jsonData))
+        }
+    }
 
     // MARK: - Private
 

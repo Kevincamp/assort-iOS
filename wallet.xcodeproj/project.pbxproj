@@ -51,6 +51,8 @@
 		46F1C292279B2DD700AD02AC /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C290279B2DD700AD02AC /* CashViewController.swift */; };
 		46F1C294279B71E300AD02AC /* NominationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C293279B71E300AD02AC /* NominationCell.swift */; };
 		46F1C295279B71E300AD02AC /* NominationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1C293279B71E300AD02AC /* NominationCell.swift */; };
+		4B64E8252846D25600567B8C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64E8242846D25600567B8C /* Utils.swift */; };
+		4B64E8272846D2A500567B8C /* TempData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64E8262846D2A500567B8C /* TempData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,8 @@
 		46B5434427A5844C003AC47E /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		46F1C290279B2DD700AD02AC /* CashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashViewController.swift; sourceTree = "<group>"; };
 		46F1C293279B71E300AD02AC /* NominationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NominationCell.swift; sourceTree = "<group>"; };
+		4B64E8242846D25600567B8C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		4B64E8262846D2A500567B8C /* TempData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +293,8 @@
 				46606B48279215B50025E5FD /* NumberMasker.swift */,
 				46606B4F2792187B0025E5FD /* NumberPadLabel.swift */,
 				460687572820FCFB00C7E87A /* AlertUtils.swift */,
+				4B64E8242846D25600567B8C /* Utils.swift */,
+				4B64E8262846D2A500567B8C /* TempData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -477,8 +483,10 @@
 				460687562820F45A00C7E87A /* BaseViewProtocol.swift in Sources */,
 				460687482820E07900C7E87A /* Data+Codable.swift in Sources */,
 				4606875B28210BA800C7E87A /* ResultViewController.swift in Sources */,
+				4B64E8272846D2A500567B8C /* TempData.swift in Sources */,
 				46606B422792145F0025E5FD /* NumberCell.swift in Sources */,
 				46606B0B279206FE0025E5FD /* LandingViewController.swift in Sources */,
+				4B64E8252846D25600567B8C /* Utils.swift in Sources */,
 				460687582820FCFB00C7E87A /* AlertUtils.swift in Sources */,
 				460687462820E03200C7E87A /* NetworkReachability.swift in Sources */,
 				466FB4FE279CFCAB009C7452 /* Nomination.swift in Sources */,
