@@ -58,7 +58,7 @@ class Core {
             }
         }
         
-        return res.count == 0 ? nil : res
+        return res
     }
     
     public func tryToComplete(amount: Double, with cashOutItems:Dictionary<Nomination, Int>) -> Dictionary<Nomination, Int> {

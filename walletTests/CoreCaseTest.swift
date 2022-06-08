@@ -68,8 +68,9 @@ class CoreCaseTest: XCTestCase {
     func test_validateTryToComplete() {
         let amount = 5.0
         var cashOutItems = Dictionary<Nomination, Int>()
-        cashOutItems[.fiftyCents] = 5
-        cashOutItems[.quarter] = 13
+        cashOutItems[.fiftyCents] = 5 // $ 2.50
+        cashOutItems[.quarter] = 13 // $ 2.75
+        // Total = $ 5.25
         
         let result = Core().tryToComplete(amount: amount, with: cashOutItems)
         
